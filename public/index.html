@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anup | CSE Student & Full Stack Web Developer</title>
+  <meta name="description" content="Portfolio of Anup - Computer Science & Engineering (CSE) Student and Full Stack Web Developer. Modern design, smooth scroll animations, and production web projects." />
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            orange: {
+              50: '#fff7ed',
+              100: '#ffedd5',
+              200: '#fed7aa',
+              300: '#fdba74',
+              400: '#fb923c',
+              500: '#f97316',
+              600: '#ea580c',
+              700: '#c2410c',
+              800: '#9a3412',
+              900: '#7c2d12',
+              950: '#431407'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Lenis Smooth Scroll -->
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="icon" type="image/jpeg" href="/images/anup-cinematic.jpg" />
+</head>
+<body class="selection:bg-orange-500 selection:text-white">
+  <!-- Scroll Progress Indicator -->
+  <div id="scroll-progress"></div>
+
+  <!-- Full-Background Photo with Cinematic Scroll Parallax (Folioblox Style) -->
+  <div id="full-bg-photo-wrapper">
+    <div id="full-bg-photo" style="background-image: url('/images/anup-cinematic.jpg');"></div>
+    <div class="full-bg-overlay"></div>
+  </div>
+
+  <!-- Ambient Interactive Canvas Background -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- Main Website Content Wrapper -->
+  <div class="content-wrapper min-h-screen flex flex-col justify-between">
+
+    <!-- Top Navigation Bar (Folioblox Style Layout) -->
+    <header class="cwh-navbar">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between py-4">
+        
+        <!-- Brand Logo -->
+        <a href="#hero-section" class="flex items-center gap-3 group">
+          <span class="site-brand-name font-black text-2xl tracking-tighter text-white group-hover:text-orange-400 transition-colors">
+            Anup<span class="text-orange-500">.</span>
+          </span>
+          <span class="hidden sm:inline-block text-[10px] uppercase font-bold tracking-widest text-orange-400 px-2 py-0.5 rounded-full bg-orange-950/60 border border-orange-500/30">
+            CSE Undergrad
+          </span>
+        </a>
+
+        <!-- Desktop Navigation Links (Clean Center Nav) -->
+        <nav class="hidden md:flex items-center gap-8">
+          <a href="#hero-section" class="nav-link">Home</a>
+          <a href="#about" class="nav-link">About</a>
+          <a href="#projects" class="nav-link">Projects</a>
+          <a href="#notes" class="nav-link">Notes</a>
+          <a href="#blogs" class="nav-link">Blog</a>
+          <a href="#contact" class="nav-link">Contact</a>
+        </nav>
+
+        <!-- Right Action Controls (Folioblox "Get in touch" pill) -->
+        <div class="flex items-center gap-4">
+          
+          <!-- Search Pill -->
+          <button id="open-search-btn" class="hidden sm:flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-gray-400 bg-slate-800/80 hover:bg-slate-700/80 border border-white/10 rounded-full transition-all" title="Search (Ctrl + K)">
+            <span>🔍 Search</span>
+            <kbd class="px-1.5 py-0.5 bg-slate-900 border border-slate-700 rounded-full text-[10px] font-mono text-gray-300">Ctrl K</kbd>
+          </button>
+
+          <!-- Theme Toggle -->
+          <button id="theme-toggle-btn" class="w-9 h-9 rounded-full bg-slate-800/80 border border-white/10 flex items-center justify-center text-sm hover:border-orange-500 transition-all" title="Toggle Dark/Light Mode">
+            ☀️
+          </button>
+
+          <!-- Folioblox Style "Get in touch" Button with Arrow Circle -->
+          <a href="#contact" class="btn-touch hidden sm:inline-flex">
+            <span>Get in touch</span>
+            <span class="arrow-circle">→</span>
+          </a>
+
+          <!-- Mobile Hamburger -->
+          <button id="mobile-menu-btn" class="md:hidden text-gray-300 hover:text-white p-2">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile Dropdown Navigation -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-white/10 bg-slate-950/95 backdrop-blur-lg px-6 py-4 space-y-3">
+        <a href="#hero-section" class="block py-2 text-gray-300 hover:text-orange-400 font-medium">Home</a>
+        <a href="#about" class="block py-2 text-gray-300 hover:text-orange-400 font-medium">About</a>
+        <a href="#projects" class="block py-2 text-gray-300 hover:text-orange-400 font-medium">Projects</a>
+        <a href="#notes" class="block py-2 text-gray-300 hover:text-orange-400 font-medium">Handwritten Notes</a>
+        <a href="#blogs" class="block py-2 text-gray-300 hover:text-orange-400 font-medium">Blog Articles</a>
+        <a href="#contact" class="block py-2 text-gray-300 hover:text-orange-400 font-medium">Get in Touch</a>
+      </div>
+    </header>
+
+    <!-- HERO SECTION (Folioblox Style Layout with Full Background Photo) -->
+    <section id="hero-section" class="relative min-h-[85vh] flex flex-col justify-center pt-12 pb-16 overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full flex-1 flex flex-col justify-between">
+        
+        <!-- Main Hero Grid (Typography on Left, Statement on Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center pt-8 md:pt-14 pb-12">
+          
+          <!-- Left Column: Big Bold Role (Folioblox Style) -->
+          <div class="lg:col-span-7 space-y-2">
+            <div class="inline-block text-xs sm:text-sm font-bold uppercase tracking-widest text-orange-400 mb-2 font-mono">
+              Hey, I'm Anup —
+            </div>
+
+            <!-- Massive Headline -->
+            <h1 class="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-black text-white leading-[0.92] tracking-tighter drop-shadow-lg">
+              Web<br />Developer<span class="text-orange-500">.</span>
+            </h1>
+
+            <!-- Animated Typing Subtitle -->
+            <div class="pt-4 text-base sm:text-xl font-bold text-gray-300 flex items-center">
+              <span>Specializing in&nbsp;</span>
+              <span id="typewriter-text" class="text-orange-400">Full Stack Web Engineering</span><span class="typewriter-cursor text-orange-500">|</span>
+            </div>
+          </div>
+
+          <!-- Right Column: Statement & CTAs (Folioblox Style) -->
+          <div class="lg:col-span-5 space-y-5 lg:pl-6">
+            <div class="backdrop-blur-md bg-slate-950/40 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl">
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-white leading-snug">
+                Great code should<br /><span class="text-orange-400">feel invisible.</span>
+              </h2>
+              <p id="hero-bio" class="text-sm sm:text-base text-gray-300 mt-3 leading-relaxed">
+                CSE student building high-performance modern web apps that scale and deliver seamless user experiences. From responsive interfaces to clean APIs.
+              </p>
+              
+              <div class="flex flex-wrap items-center gap-3 pt-5">
+                <a href="#projects" class="btn-touch">
+                  <span>Explore Projects</span>
+                  <span class="arrow-circle">↓</span>
+                </a>
+                <a href="#contact" class="px-5 py-2.5 rounded-full border border-white/20 hover:border-orange-500 hover:text-orange-400 text-xs sm:text-sm font-semibold text-gray-300 transition-all">
+                  Let's Connect
+                </a>
+              </div>
+            </div>
+
+            <!-- Social Links Strip -->
+            <div class="flex items-center gap-3 px-2" id="social-links-container">
+              <!-- Rendered dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Horizontal Capabilities Strip (#01, #02, #03, #04 Folioblox Style) -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 pt-8 pb-4 border-t border-white/15 scroll-reveal">
+          <div class="flex items-center gap-3">
+            <span class="text-orange-500 font-mono font-black text-lg">#01</span>
+            <div>
+              <div class="text-sm font-bold text-white">Full Stack Web</div>
+              <div class="text-[11px] text-gray-400">Modern Architecture</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-orange-500 font-mono font-black text-lg">#02</span>
+            <div>
+              <div class="text-sm font-bold text-white">React & Next.js</div>
+              <div class="text-[11px] text-gray-400">Server Components</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-orange-500 font-mono font-black text-lg">#03</span>
+            <div>
+              <div class="text-sm font-bold text-white">Algorithms & DSA</div>
+              <div class="text-[11px] text-gray-400">Core Computer Science</div>
+            </div>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-orange-500 font-mono font-black text-lg">#04</span>
+            <div>
+              <div class="text-sm font-bold text-white">Open Source</div>
+              <div class="text-[11px] text-gray-400">Building in Public</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURED PROJECTS SHOWCASE (Folioblox Style Scrolling Grid as seen in Reference 2) -->
+    <section id="projects" class="py-24 relative z-10 scroll-reveal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2 font-mono">Portfolio Showcase</div>
+            <h2 class="text-3xl sm:text-5xl font-black text-white tracking-tight">Featured Projects</h2>
+            <p class="text-sm text-gray-400 mt-2 max-w-xl">
+              Production-grade web applications, developer sandboxes, and full-stack platforms built with clean scalable code.
+            </p>
+          </div>
+          <!-- Project Category Filters -->
+          <div id="project-filters" class="flex flex-wrap gap-2">
+            <!-- Filter buttons -->
+          </div>
+        </div>
+
+        <!-- Projects Grid (Folioblox Modern Cards) -->
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ABOUT ME & CSE JOURNEY -->
+    <section id="about" class="py-20 relative z-10 scroll-reveal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <div class="lg:col-span-6 space-y-6">
+            <div class="text-xs font-bold uppercase tracking-widest text-orange-400 font-mono">About The Developer</div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
+              CSE Undergrad with a passion for building scalable web apps.
+            </h2>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              I am Anup, an engineering student focusing on Computer Science. Inspired by the culture of accessible coding education popularized by CodeWithHarry, I love taking challenging CS concepts and translating them into tangible, deployed web projects.
+            </p>
+            <p class="text-sm sm:text-base text-gray-300 leading-relaxed">
+              When I'm not writing React components or architecting Node/Python backends, I study algorithmic problem solving, optimize database queries, and write handwritten cheatsheets.
+            </p>
+
+            <!-- Academic Stats -->
+            <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/10" id="hero-stats-container">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <div class="lg:col-span-6">
+            <!-- Skills Matrix -->
+            <div class="backdrop-blur-md bg-slate-900/70 p-6 sm:p-8 rounded-3xl border border-white/10 shadow-2xl">
+              <h3 class="text-lg font-bold text-white mb-4 flex items-center justify-between">
+                <span>Technical Stack</span>
+                <span class="text-xs font-mono text-orange-400">Current Arsenal</span>
+              </h3>
+              <div id="skills-grid" class="space-y-4">
+                <!-- Injected via JavaScript -->
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CHEAT SHEETS & HANDWRITTEN NOTES (Student Hallmark) -->
+    <section id="notes" class="py-24 relative z-10 scroll-reveal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-3xl mx-auto mb-14">
+          <div class="inline-block px-3 py-1 rounded-full bg-orange-950/60 border border-orange-500/30 text-orange-400 text-xs font-semibold mb-3">
+            📚 Student Study Resources
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Handwritten Notes & Cheat Sheets</h2>
+          <p class="text-sm sm:text-base text-gray-400 mt-3">
+            Curated, concise revision guides I built for university exams, technical interviews, and quick reference.
+          </p>
+        </div>
+
+        <div id="notes-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- LATEST TECHNICAL BLOGS -->
+    <section id="blogs" class="py-20 relative z-10 scroll-reveal">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div>
+            <div class="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2 font-mono">Writing & Insights</div>
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Articles & Development Logs</h2>
+          </div>
+          <a href="#blogs" class="px-4 py-2 rounded-full border border-white/20 text-xs font-semibold text-gray-300 hover:text-white hover:border-white transition-all">
+            View All Posts
+          </a>
+        </div>
+
+        <div id="blogs-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Injected via JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CONTACT ME SECTION -->
+    <section id="contact" class="py-24 relative z-10 scroll-reveal">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="backdrop-blur-xl bg-slate-900/80 p-8 sm:p-14 rounded-3xl border border-white/10 shadow-2xl">
+          <div class="text-center max-w-xl mx-auto mb-10">
+            <div class="text-xs font-bold uppercase tracking-widest text-orange-400 mb-2 font-mono">Let's Connect</div>
+            <h2 class="text-3xl sm:text-4xl font-black text-white">Get in Touch with Anup</h2>
+            <p class="text-sm text-gray-400 mt-2">Interested in working together, discussing an internship, or exploring a project? Send a note directly.</p>
+          </div>
+
+          <form id="contact-form" class="space-y-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1.5">Your Name</label>
+                <input type="text" name="name" required placeholder="John Doe" class="w-full px-4 py-3 rounded-xl bg-slate-800/90 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors text-sm" />
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-gray-300 mb-1.5">Your Email</label>
+                <input type="email" name="email" required placeholder="john@example.com" class="w-full px-4 py-3 rounded-xl bg-slate-800/90 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors text-sm" />
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1.5">Subject</label>
+              <input type="text" name="subject" placeholder="Internship / Web Project Inquiry" class="w-full px-4 py-3 rounded-xl bg-slate-800/90 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors text-sm" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-gray-300 mb-1.5">Your Message</label>
+              <textarea name="message" rows="4" required placeholder="Write your message here..." class="w-full px-4 py-3 rounded-xl bg-slate-800/90 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500 transition-colors text-sm"></textarea>
+            </div>
+
+            <div class="text-center pt-3">
+              <button type="submit" class="btn-touch w-full sm:w-auto px-8 py-3 text-sm font-bold justify-center">
+                <span>Send Message</span>
+                <span class="arrow-circle">→</span>
+              </button>
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-white/10 bg-slate-950/90 py-12 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 pb-10 border-b border-white/10">
+          <div class="space-y-3 md:col-span-2">
+            <span class="site-brand-name font-black text-2xl text-white">
+              Anup<span class="text-orange-500">.</span>
+            </span>
+            <p id="footer-tagline" class="text-xs text-gray-400 max-w-sm leading-relaxed">
+              Computer Science & Engineering Student & Full Stack Web Developer.
+            </p>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-3">Portfolio Links</h4>
+            <ul class="space-y-2 text-xs text-gray-400">
+              <li><a href="#projects" class="hover:text-white">Web Projects</a></li>
+              <li><a href="#notes" class="hover:text-white">Cheat Sheets</a></li>
+              <li><a href="#blogs" class="hover:text-white">Tech Blogs</a></li>
+              <li><a href="#about" class="hover:text-white">About Me</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-xs font-bold text-orange-400 uppercase tracking-wider mb-3">Connect</h4>
+            <ul class="space-y-2 text-xs text-gray-400">
+              <li><a href="#contact" class="hover:text-white">Contact Anup</a></li>
+              <li><a href="https://github.com/anup-dev" target="_blank" rel="noopener" class="hover:text-white">GitHub</a></li>
+              <li><a href="https://linkedin.com" target="_blank" rel="noopener" class="hover:text-white">LinkedIn</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+          <div class="flex items-center gap-2">
+            <p>© 2026 Anup. All rights reserved.</p>
+            <!-- Discreet Admin Portal Link -->
+            <a href="/admin" class="text-gray-700 hover:text-orange-400 text-xs transition-colors ml-2" title="Admin Portal">
+              🔒
+            </a>
+          </div>
+          <p>Crafted with modern HTML5, Canvas, Lenis & Node.js</p>
+        </div>
+
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SEARCH MODAL (Quick Find) -->
+  <div id="search-modal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="p-4 border-b border-white/10 flex items-center gap-3">
+        <span class="text-gray-400">🔍</span>
+        <input id="search-input" type="text" placeholder="Search projects, notes, articles..." class="flex-1 bg-transparent text-white placeholder-gray-500 focus:outline-none text-sm" />
+        <button id="close-search-btn" class="text-gray-400 hover:text-white text-xs px-2 py-1 rounded bg-slate-800">ESC</button>
+      </div>
+      <div id="search-results" class="py-2 max-h-96 overflow-y-auto">
+        <div class="text-sm text-gray-400 p-4 text-center">Type something to search...</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="/js/background.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+</html>

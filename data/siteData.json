@@ -1,0 +1,258 @@
+{
+  "profile": {
+    "name": "Anup Kumar",
+    "brandName": "Anup_CST",
+    "title": "CSE Student & Full Stack Web Developer",
+    "tagline": "Computer Science & Engineering Undergrad building modern web apps.",
+    "typingPhrases": [
+      "Remember My Name  Anup Kumar",
+      "Anup Kumar",
+      "CSE Student & Tech Enthusiast",
+      "React",
+      "Next.js & Node.js Builder",
+      "DSA & Algorithms Problem Solver",
+      "Open Source Contributor"
+    ],
+    "bio": "Welcome to my portfolio! I am Anup, a Computer Science and Engineering (CSE) student and Full Stack Web Developer. Inspired by CodeWithHarry's mission of practical, project-based learning, I build modern web applications, master data structures, and share curated developer notes and projects.",
+    "avatar": "/uploads/Anup_Photo_1792854382256.jpg",
+    "experience": "Diploma In Engineer Complete",
+    "students": "10,0000 +",
+    "coursesCount": "15 + Guides",
+    "projectsCount": "25 + Projects",
+    "resumeUrl": "#",
+    "location": "India / Remote",
+    "availableForWork": true
+  },
+  "admin": {
+    "username": "anupsarkar04",
+    "password": "Anupcst*04#"
+  },
+  "background": {
+    "type": "waves",
+    "customImage": "/uploads/IMG_0407_1792860900528.JPG",
+    "profileBackground": "/images/anup-cinematic.jpg",
+    "overlayOpacity": 0.95,
+    "blur": 1,
+    "accentColor": "#f97316",
+    "secondaryColor": "#ec4899",
+    "photoAnimation": "scroll-parallax-zoom",
+    "particleCount": 45,
+    "particleSpeed": 0.8
+  },
+  "tracks": [
+    {
+      "id": "01",
+      "name": "Full Stack Web"
+    },
+    {
+      "id": "02",
+      "name": "React & Next.js"
+    },
+    {
+      "id": "03",
+      "name": "Algorithms & DSA"
+    },
+    {
+      "id": "04",
+      "name": "Open Source"
+    }
+  ],
+  "projects": [
+    {
+      "id": "p_1792857483190",
+      "title": "Ai Anup kumar sarkar",
+      "category": "Full Stack",
+      "tags": [
+        "Next.js",
+        "TypeScript",
+        "Tailwind"
+      ],
+      "description": "web application with modern architecture.",
+      "githubUrl": "http://localhost:5000/admin",
+      "liveUrl": "https://demo.example.com",
+      "image": "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=800&q=80",
+      "featured": true
+    },
+    {
+      "id": "p2",
+      "title": "NeuralCode - AI Code Reviewer & Assistant",
+      "category": "AI Tools",
+      "description": "Developer tool that performs static analysis, detects security vulnerabilities, and generates automated refactoring suggestions.",
+      "tags": [
+        "Python",
+        "FastAPI",
+        "React",
+        "OpenAI API",
+        "Docker"
+      ],
+      "image": "https://images.unsplash.com/photo-1555949963-aa79dcee981c?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "https://demo.example.com/neuralcode",
+      "githubUrl": "https://github.com/anup-dev/neuralcode",
+      "featured": true
+    },
+    {
+      "id": "p3",
+      "title": "StreamPulse - Video Streaming & Live Chat",
+      "category": "Full Stack",
+      "description": "High-throughput video streaming platform with adaptive bitrate HLS transcoding, chat room websockets, and payment gateway.",
+      "tags": [
+        "Node.js",
+        "Redis",
+        "Kafka",
+        "PostgreSQL",
+        "React"
+      ],
+      "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+      "liveUrl": "https://demo.example.com/streampulse",
+      "githubUrl": "https://github.com/anup-dev/streampulse",
+      "featured": true
+    }
+  ],
+  "notes": [
+    {
+      "id": "n1",
+      "title": "Python Complete Handwritten Master Notes",
+      "category": "Python",
+      "pages": "92 Pages",
+      "downloads": "45,000+",
+      "description": "Covers basics, loops, functions, OOP, decorators, generators, file handling, and top 50 interview questions.",
+      "fileUrl": "#download-python-notes",
+      "icon": "python"
+    },
+    {
+      "id": "n2",
+      "title": "Ultimate Modern JavaScript (ES6 to ES2024)",
+      "category": "Web Dev",
+      "pages": "68 Pages",
+      "downloads": "38,200+",
+      "description": "Deep dive into Event Loop, Closures, Promises, Async/Await, Prototypes, DOM API, and Array methods cheat sheet.",
+      "fileUrl": "#download-js-notes",
+      "icon": "javascript"
+    },
+    {
+      "id": "n3",
+      "title": "React 19 & Next.js Quick Architecture Cheatsheet",
+      "category": "Frontend",
+      "pages": "45 Pages",
+      "downloads": "29,400+",
+      "description": "Hooks cheat sheet, Server vs Client components, caching mechanisms, custom hooks, and state management recipes.",
+      "fileUrl": "#download-react-notes",
+      "icon": "react"
+    },
+    {
+      "id": "n4",
+      "title": "Data Structures & Algorithms Cheat Sheet & Patterns",
+      "category": "DSA",
+      "pages": "115 Pages",
+      "downloads": "52,000+",
+      "description": "14 core coding patterns: Sliding Window, Two Pointers, Fast & Slow Pointers, Top K Elements, and DP templates.",
+      "fileUrl": "#download-dsa-notes",
+      "icon": "code"
+    }
+  ],
+  "blogs": [
+    {
+      "id": "b1",
+      "title": "10 Clean Code Principles Every Full Stack Developer Should Master",
+      "category": "Architecture",
+      "date": "Oct 18, 2026",
+      "readTime": "6 min read",
+      "excerpt": "Writing maintainable, scalable software is more than just getting it to compile. Here are the 10 golden rules I follow in every production repository.",
+      "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=800&q=80",
+      "link": "#blog"
+    },
+    {
+      "id": "b2",
+      "title": "Building Real-Time Multi-User Collaboration With WebSockets and Redis",
+      "category": "System Design",
+      "date": "Sep 29, 2026",
+      "readTime": "9 min read",
+      "excerpt": "A deep dive into horizontally scaling real-time connections using Redis Pub/Sub, sticky sessions, and state reconciliation.",
+      "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+      "link": "#blog"
+    },
+    {
+      "id": "b3",
+      "title": "Why Next.js Server Components Changed How We Think About State",
+      "category": "Frontend",
+      "date": "Sep 12, 2026",
+      "readTime": "5 min read",
+      "excerpt": "Unpacking the mental shift from client-side useEffect state waterfalls to seamless edge streaming and instant zero-bundle components.",
+      "image": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80",
+      "link": "#blog"
+    }
+  ],
+  "testimonials": [
+    {
+      "id": "t1",
+      "name": "Rohan Sharma",
+      "role": "Software Engineer at Razorpay",
+      "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+      "quote": "Anup's tutorials and notes are on the same league as Harry bhai's legendary videos! The clarity in explanations helped me crack my dream frontend role."
+    },
+    {
+      "id": "t2",
+      "name": "Priya Patel",
+      "role": "Cloud Architect at TCS Digital",
+      "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80",
+      "quote": "The DSA cheatsheets and real-world project tutorials gave me the confidence to ace product-based company interview rounds. Truly invaluable!"
+    },
+    {
+      "id": "t3",
+      "name": "Aman Verma",
+      "role": "Full Stack Dev & Open Source Contributor",
+      "avatar": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+      "quote": "Super clean coding style, modern tech stack explanations, and zero fluff. CodeWithAnup is bookmarked as my daily go-to tech hub."
+    }
+  ],
+  "skills": [
+    {
+      "name": "React / Next.js",
+      "level": "96%",
+      "category": "Frontend"
+    },
+    {
+      "name": "JavaScript / TypeScript",
+      "level": "98%",
+      "category": "Languages"
+    },
+    {
+      "name": "Python & FastAPI",
+      "level": "92%",
+      "category": "Backend"
+    },
+    {
+      "name": "Node.js & Express",
+      "level": "94%",
+      "category": "Backend"
+    },
+    {
+      "name": "Tailwind CSS",
+      "level": "98%",
+      "category": "Frontend"
+    },
+    {
+      "name": "PostgreSQL & Prisma",
+      "level": "88%",
+      "category": "Database"
+    },
+    {
+      "name": "Docker & DevOps",
+      "level": "85%",
+      "category": "DevOps"
+    },
+    {
+      "name": "Data Structures (DSA)",
+      "level": "90%",
+      "category": "Core CS"
+    }
+  ],
+  "socialLinks": {
+    "youtube": "https://youtube.com/@codewithanup",
+    "github": "https://github.com/anup-dev",
+    "linkedin": "https://linkedin.com/in/anup-developer",
+    "twitter": "https://twitter.com/codewithanup",
+    "discord": "https://discord.gg/codewithanup",
+    "email": "anup.developer@example.com"
+  }
+}

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Portal | CodeWithAnup</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            purple: {
+              50: '#faf5ff',
+              100: '#f3e8ff',
+              200: '#e9d5ff',
+              300: '#d8b4fe',
+              400: '#c084fc',
+              500: '#a855f7',
+              600: '#9333ea',
+              700: '#7e22ce',
+              800: '#6b21a8',
+              900: '#581c87',
+              950: '#3b0764'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Admin Styles -->
+  <link rel="stylesheet" href="/css/admin.css" />
+  <link rel="icon" type="image/svg+xml" href="/images/anup-avatar.svg" />
+</head>
+<body class="bg-slate-950 text-gray-100 flex flex-col min-h-screen">
+
+  <!-- ========================================== -->
+  <!-- 1. ADMIN LOGIN VIEW (SHOWN WHEN NOT LOGGED IN) -->
+  <!-- ========================================== -->
+  <div id="login-container" class="min-h-screen flex flex-col items-center justify-center p-4 relative z-20">
+    <div class="w-full max-w-md admin-card p-8 border-purple-500/40 shadow-2xl shadow-purple-950/60 relative overflow-hidden">
+      
+      <!-- Top Decorative Glow -->
+      <div class="absolute -top-12 -left-12 w-32 h-32 bg-purple-600/30 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-pink-600/20 rounded-full blur-2xl pointer-events-none"></div>
+
+      <!-- Brand Header -->
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 mx-auto rounded-xl bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center font-mono font-bold text-white text-xl shadow-lg shadow-purple-500/30 mb-3">
+          &lt;/&gt;
+        </div>
+        <h1 class="text-2xl font-extrabold text-white">Anup_CST</h1>
+        <p class="text-xs text-purple-300 font-semibold uppercase tracking-wider mt-1">Admin Portal Authentication</p>
+        <p class="text-xs text-gray-400 mt-1">Sign in to manage your background photo and portfolio content</p>
+      </div>
+
+      <!-- Error Alert Message -->
+      <div id="login-error-alert" class="hidden mb-4 p-3 rounded-lg bg-red-950/80 border border-red-500/40 text-red-200 text-xs flex items-center gap-2">
+        <span>⚠️</span>
+        <span id="login-error-text">Invalid username or password</span>
+      </div>
+
+      <!-- Login Form -->
+      <form id="admin-login-form" class="space-y-4">
+        <div>
+          <label class="admin-label">Username</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 text-sm">👤</span>
+            <input id="login-username" type="text" required placeholder="anup" class="admin-input pl-9" />
+          </div>
+        </div>
+
+        <div>
+          <label class="admin-label">Password</label>
+          <div class="relative">
+            <span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400 text-sm">🔒</span>
+            <input id="login-password" type="password" required placeholder="••••••••" class="admin-input pl-9 pr-10" />
+            <button type="button" id="toggle-password-btn" class="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-white text-xs">
+              👁️
+            </button>
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn" class="w-full py-2.5 px-4 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold text-sm shadow-lg shadow-purple-500/30 transition-all flex items-center justify-center gap-2 mt-2">
+          <span>Sign In to Dashboard</span>
+          <span>→</span>
+        </button>
+      </form>
+
+      <!-- Credentials Hint -->
+      <div class="mt-6 pt-4 border-t border-purple-500/20 text-center">
+        <p class="text-[11px] text-gray-400">
+          Default credentials: <span class="text-purple-300 font-mono">user: anup</span> | <span class="text-purple-300 font-mono">pass: anup123</span>
+        </p>
+        <a href="/" class="inline-block mt-3 text-xs text-gray-400 hover:text-white transition-colors">
+          ← Return to Portfolio Website
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+
+  <!-- ========================================== -->
+  <!-- 2. FULL ADMIN DASHBOARD (SHOWN WHEN LOGGED IN) -->
+  <!-- ========================================== -->
+  <div id="dashboard-container" class="hidden flex flex-col min-h-screen">
+    
+    <!-- Top Admin Bar -->
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-purple-500/20 px-6 py-3.5">
+      <div class="max-w-7xl mx-auto flex items-center justify-between">
+        
+        <!-- Logo & Title -->
+        <div class="flex items-center gap-3">
+          <a href="/" class="w-9 h-9 rounded-lg bg-gradient-to-br from-purple-600 to-pink-500 flex items-center justify-center font-mono font-bold text-white text-base shadow-lg shadow-purple-500/30">
+            &lt;/&gt;
+          </a>
+          <div>
+            <div class="flex items-center gap-2">
+              <h1 class="text-base font-extrabold text-white">Anup_CST</h1>
+              <span class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-purple-900/60 text-purple-300 border border-purple-500/30 uppercase tracking-wider">
+                Admin Suite
+              </span>
+            </div>
+            <p class="text-[11px] text-gray-400">CSE Student & Web Developer Portal</p>
+          </div>
+        </div>
+
+        <!-- Action Controls -->
+        <div class="flex items-center gap-3">
+          <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-500/30 text-emerald-400 text-xs">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span>Logged in as Anup</span>
+          </div>
+
+          <a href="/" target="_blank" class="px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-gray-200 text-xs font-semibold border border-purple-500/20 flex items-center gap-1.5 transition-colors">
+            <span>View Live Site</span> ↗
+          </a>
+
+          <button id="save-all-btn" onclick="adminApp.saveAllChanges()" class="px-5 py-2 rounded-lg bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs font-bold shadow-lg shadow-purple-500/30 flex items-center gap-2 transition-all transform hover:scale-[1.02]">
+            <span>💾 Save All Changes</span>
+          </button>
+
+          <!-- Sign Out Button -->
+          <button onclick="adminApp.logout()" class="px-3 py-2 rounded-lg bg-red-950/60 hover:bg-red-900 text-red-300 text-xs font-semibold border border-red-500/30 flex items-center gap-1 transition-colors" title="Sign Out">
+            <span>🚪 Logout</span>
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+    <!-- Main Content Layout -->
+    <div class="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-1 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      
+      <!-- Left Navigation Sidebar -->
+      <aside class="lg:col-span-3 space-y-4">
+        <div class="admin-card p-4 space-y-1">
+          <div class="text-[11px] font-bold uppercase tracking-wider text-purple-400 px-3 py-2">
+            Management Console
+          </div>
+          
+          <button class="w-full sidebar-link active" data-tab="hero-media">
+            <span>🌌</span> <span>Background & Hero Photo</span>
+          </button>
+          <button class="w-full sidebar-link" data-tab="projects">
+            <span>💻</span> <span>Projects Showcase</span>
+          </button>
+          <button class="w-full sidebar-link" data-tab="notes">
+            <span>📑</span> <span>Cheat Sheets & Notes</span>
+          </button>
+          <button class="w-full sidebar-link" data-tab="blogs">
+            <span>✍️</span> <span>Articles & Blogs</span>
+          </button>
+          <button class="w-full sidebar-link" data-tab="stats-skills">
+            <span>📊</span> <span>CSE Stats & Skills</span>
+          </button>
+          <button class="w-full sidebar-link" data-tab="messages">
+            <span>📬</span> <span>Contact Messages</span>
+          </button>
+          <button class="w-full sidebar-link" data-tab="social">
+            <span>🌐</span> <span>Social & Links</span>
+          </button>
+          <button class="w-full sidebar-link" data-tab="security">
+            <span>🔒</span> <span>Login & Security</span>
+          </button>
+        </div>
+
+        <!-- Quick Metrics Widget -->
+        <div class="admin-card p-4 space-y-3">
+          <h3 class="text-xs font-bold uppercase tracking-wider text-gray-400">Content Summary</h3>
+          <div class="grid grid-cols-3 gap-2 text-center text-xs">
+            <div class="p-2.5 rounded-lg bg-slate-800/60 border border-purple-500/10">
+              <div id="count-projects" class="text-lg font-bold text-orange-400">0</div>
+              <div class="text-gray-400">Projects</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-800/60 border border-purple-500/10">
+              <div id="count-notes" class="text-lg font-bold text-blue-400">0</div>
+              <div class="text-gray-400">Notes</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-800/60 border border-purple-500/10">
+              <div id="count-blogs" class="text-lg font-bold text-pink-400">0</div>
+              <div class="text-gray-400">Articles</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Workspace Area -->
+      <main class="lg:col-span-9 space-y-6">
+
+        <!-- TAB: HERO & MEDIA (BACKGROUND PHOTO WITH SCROLL ANIMATION) -->
+        <section id="tab-hero-media" class="tab-content space-y-6">
+          
+          <!-- Full Background Photo Customizer (User's primary requirement) -->
+          <div class="admin-card p-6 border-purple-500/30">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-purple-500/20">
+              <div>
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                  <span>🌌</span> <span>Full-Background Photo & Scroll Animation</span>
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">Your photo is displayed as the full website background with smooth scroll-driven parallax and zoom animation.</p>
+              </div>
+              <span class="text-xs px-2.5 py-1 rounded-full bg-purple-950 text-purple-300 font-semibold border border-purple-500/30">
+                Core Feature
+              </span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+              
+              <!-- Background Image Controls (Left) -->
+              <div class="md:col-span-7 space-y-4">
+                <div>
+                  <label class="admin-label">Background Photo URL</label>
+                  <input id="input-bg-image" type="text" class="admin-input" placeholder="/uploads/Anup_Photo.jpg" />
+                </div>
+
+                <!-- Upload local file -->
+                <div>
+                  <label class="admin-label">Or Upload New Photo from Your Device</label>
+                  <input id="file-bg-upload" type="file" accept="image/*" class="hidden" />
+                  <div id="dropzone-bg" class="photo-dropzone">
+                    <div class="text-2xl mb-1">📸</div>
+                    <div class="text-xs font-semibold text-purple-300">Click to upload your full-background photo</div>
+                    <div class="text-[11px] text-gray-400 mt-1">PNG, JPG, WEBP supported • Saves directly to uploads</div>
+                  </div>
+                </div>
+
+                <!-- Background Animation Settings -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+                  <div>
+                    <label class="admin-label">Canvas Ambient Effect</label>
+                    <select id="input-bg-type" class="admin-input">
+                      <option value="particles">Floating Constellation Nodes</option>
+                      <option value="nebula">Nebula Glowing Orbs</option>
+                      <option value="waves">Digital Cyber Waves</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label class="admin-label">Scroll Animation Mode</label>
+                    <select id="input-photo-anim" class="admin-input">
+                      <option value="scroll-parallax-zoom">Scroll Parallax + Smooth Zoom</option>
+                      <option value="smooth-parallax">Parallax Only</option>
+                    </select>
+                  </div>
+                </div>
+
+                <!-- Sliders -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1">
+                  <div>
+                    <div class="flex justify-between items-center mb-1">
+                      <label class="admin-label mb-0">Photo Visibility / Opacity</label>
+                      <span id="val-bg-opacity" class="text-xs font-mono text-purple-400">0.75</span>
+                    </div>
+                    <input id="input-bg-opacity" type="range" min="0.1" max="0.95" step="0.05" class="w-full accent-purple-500 cursor-pointer" />
+                  </div>
+                  <div>
+                    <div class="flex justify-between items-center mb-1">
+                      <label class="admin-label mb-0">Initial Backdrop Blur</label>
+                      <span id="val-bg-blur" class="text-xs font-mono text-purple-400">0px</span>
+                    </div>
+                    <input id="input-bg-blur" type="range" min="0" max="15" step="1" class="w-full accent-purple-500 cursor-pointer" />
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Background Preview (Right) -->
+              <div class="md:col-span-5 space-y-2">
+                <label class="admin-label">Full Background Preview</label>
+                <div id="preview-bg-image" class="w-full aspect-[4/5] rounded-xl border-2 border-purple-500/40 bg-cover bg-center shadow-xl relative overflow-hidden flex items-end justify-center bg-slate-900 p-4">
+                  <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent"></div>
+                  <div class="relative z-10 text-center w-full">
+                    <span class="text-xs font-bold text-white bg-purple-900/80 px-3 py-1 rounded-full border border-purple-500/40 shadow">
+                      Scroll Animation Active
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Hero Content & CSE Identity -->
+          <div class="admin-card p-6">
+            <div class="mb-4 pb-3 border-b border-purple-500/20">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <span>📝</span> <span>Hero Content & CSE Student Identity</span>
+              </h2>
+              <p class="text-xs text-gray-400 mt-0.5">Customize your name, role, animated typewriter headlines, and student introduction.</p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="admin-label">Your Name</label>
+                  <input id="input-name" type="text" class="admin-input" placeholder="Anup" />
+                </div>
+                <div>
+                  <label class="admin-label">Brand Name (CodeWith...)</label>
+                  <input id="input-brand" type="text" class="admin-input" placeholder="CodeWithAnup" />
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="admin-label">Professional Role / Title</label>
+                  <input id="input-title" type="text" class="admin-input" placeholder="CSE Student & Full Stack Web Developer" />
+                </div>
+                <div>
+                  <label class="admin-label">Tagline / Slogan</label>
+                  <input id="input-tagline" type="text" class="admin-input" placeholder="Computer Science & Engineering Undergrad building modern web apps." />
+                </div>
+              </div>
+
+              <div>
+                <label class="admin-label">Animated Typewriter Phrases (Comma Separated)</label>
+                <input id="input-phrases" type="text" class="admin-input" placeholder="CSE Student & Tech Enthusiast, Full Stack Web Developer, React & Next.js Builder" />
+              </div>
+
+              <div>
+                <label class="admin-label">Bio & Personal Statement</label>
+                <textarea id="input-bio" rows="3" class="admin-input" placeholder="Describe your background and mission..."></textarea>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- TAB: PROJECTS -->
+        <section id="tab-projects" class="tab-content hidden space-y-6">
+          <div class="admin-card p-6">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-purple-500/20">
+              <div>
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                  <span>💻</span> <span>Featured Web Projects</span>
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">Manage web applications, repositories, live demos, and tech stacks.</p>
+              </div>
+              <button onclick="adminApp.addProject()" class="px-4 py-2 rounded-lg bg-pink-600 hover:bg-pink-500 text-white text-xs font-bold shadow-md shadow-pink-500/30">
+                + Add New Project
+              </button>
+            </div>
+
+            <div id="admin-projects-list" class="space-y-3">
+              <!-- Populated via admin.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB: NOTES & CHEAT SHEETS -->
+        <section id="tab-notes" class="tab-content hidden space-y-6">
+          <div class="admin-card p-6">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-purple-500/20">
+              <div>
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                  <span>📑</span> <span>Cheat Sheets & Handwritten Notes</span>
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">Manage downloadable revision guides and cheat sheets.</p>
+              </div>
+              <button onclick="adminApp.addNote()" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-500/30">
+                + Add New Notes
+              </button>
+            </div>
+
+            <div id="admin-notes-list" class="space-y-3">
+              <!-- Populated via admin.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB: BLOGS -->
+        <section id="tab-blogs" class="tab-content hidden space-y-6">
+          <div class="admin-card p-6">
+            <div class="flex items-center justify-between mb-6 pb-3 border-b border-purple-500/20">
+              <div>
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                  <span>✍️</span> <span>Articles & Technical Blogs</span>
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">Publish and update engineering posts.</p>
+              </div>
+              <button onclick="adminApp.addBlog()" class="px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-500 text-white text-xs font-bold">
+                + Add New Article
+              </button>
+            </div>
+
+            <div id="admin-blogs-list" class="space-y-3">
+              <!-- Populated via admin.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB: STATS & SKILLS -->
+        <section id="tab-stats-skills" class="tab-content hidden space-y-6">
+          <div class="admin-card p-6">
+            <div class="mb-4 pb-3 border-b border-purple-500/20">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <span>📊</span> <span>CSE Milestones & Social Proof</span>
+              </h2>
+              <p class="text-xs text-gray-400 mt-0.5">Highlight your student and developer metrics.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="admin-label">Community / Learners Count</label>
+                <input id="input-students" type="text" class="admin-input" placeholder="10,000+" />
+              </div>
+              <div>
+                <label class="admin-label">Courses / Guides Count</label>
+                <input id="input-courses-count" type="text" class="admin-input" placeholder="15+ Guides" />
+              </div>
+              <div>
+                <label class="admin-label">Projects Built Count</label>
+                <input id="input-projects-count" type="text" class="admin-input" placeholder="25+ Projects" />
+              </div>
+              <div>
+                <label class="admin-label">Academic Status / Experience</label>
+                <input id="input-experience" type="text" class="admin-input" placeholder="CSE Undergrad" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB: MESSAGES -->
+        <section id="tab-messages" class="tab-content hidden space-y-6">
+          <div class="admin-card p-6">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-purple-500/20">
+              <div>
+                <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                  <span>📬</span> <span>Contact Form Inquiries</span>
+                </h2>
+                <p class="text-xs text-gray-400 mt-0.5">Messages sent by visitors through the contact form on your portfolio.</p>
+              </div>
+              <button onclick="adminApp.loadMessages()" class="px-3 py-1.5 rounded bg-slate-800 text-xs text-purple-300 border border-purple-500/20">
+                🔄 Refresh Inbox
+              </button>
+            </div>
+
+            <div id="admin-messages-list" class="space-y-3">
+              <!-- Injected via admin.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB: SOCIAL LINKS -->
+        <section id="tab-social" class="tab-content hidden space-y-6">
+          <div class="admin-card p-6">
+            <div class="mb-4 pb-3 border-b border-purple-500/20">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <span>🌐</span> <span>Social & External Profiles</span>
+              </h2>
+              <p class="text-xs text-gray-400 mt-0.5">Links displayed in your hero section and footer.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="admin-label">YouTube Channel URL</label>
+                <input id="input-yt" type="text" class="admin-input" placeholder="https://youtube.com/@codewithanup" />
+              </div>
+              <div>
+                <label class="admin-label">GitHub Profile URL</label>
+                <input id="input-gh" type="text" class="admin-input" placeholder="https://github.com/anup-dev" />
+              </div>
+              <div>
+                <label class="admin-label">LinkedIn Profile URL</label>
+                <input id="input-li" type="text" class="admin-input" placeholder="https://linkedin.com/in/anup" />
+              </div>
+              <div>
+                <label class="admin-label">Twitter / X URL</label>
+                <input id="input-tw" type="text" class="admin-input" placeholder="https://twitter.com/codewithanup" />
+              </div>
+              <div>
+                <label class="admin-label">Discord Community URL</label>
+                <input id="input-dc" type="text" class="admin-input" placeholder="https://discord.gg/codewithanup" />
+              </div>
+              <div>
+                <label class="admin-label">Public Email</label>
+                <input id="input-em" type="email" class="admin-input" placeholder="anup@example.com" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TAB: SECURITY (CHANGE USERNAME & PASSWORD) -->
+        <section id="tab-security" class="tab-content hidden space-y-6">
+          <div class="admin-card p-6">
+            <div class="mb-4 pb-3 border-b border-purple-500/20">
+              <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                <span>🔒</span> <span>Admin Credentials & Security</span>
+              </h2>
+              <p class="text-xs text-gray-400 mt-0.5">Update the username and password required to access this admin panel.</p>
+            </div>
+
+            <form id="change-password-form" class="space-y-4 max-w-md">
+              <div>
+                <label class="admin-label">Current Password</label>
+                <input id="sec-current-password" type="password" required class="admin-input" placeholder="Enter current password" />
+              </div>
+              <div>
+                <label class="admin-label">New Username</label>
+                <input id="sec-new-username" type="text" required class="admin-input" placeholder="anup" />
+              </div>
+              <div>
+                <label class="admin-label">New Password</label>
+                <input id="sec-new-password" type="password" required class="admin-input" placeholder="Enter new password" />
+              </div>
+
+              <button type="submit" class="px-5 py-2.5 rounded-lg bg-purple-600 hover:bg-purple-500 text-white font-bold text-xs shadow-md shadow-purple-500/30">
+                Update Admin Credentials
+              </button>
+            </form>
+          </div>
+        </section>
+
+      </main>
+
+    </div>
+  </div>
+
+  <!-- Admin Toast Container -->
+  <div id="admin-toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col gap-2"></div>
+
+  <!-- Scripts -->
+  <script src="/js/admin.js"></script>
+</body>
+</html>

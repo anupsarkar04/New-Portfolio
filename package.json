@@ -1,0 +1,12 @@
+{
+  "name": "codewithanup",
+  "version": "1.0.0",
+  "description": "CodeWithAnup - Developer Portfolio and Coding Learning Hub inspired by CodeWithHarry",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["portfolio", "codewithharry", "developer", "tutorials", "courses", "anup"],
+  "author": "Anup",
+  "license": "MIT"
+}
